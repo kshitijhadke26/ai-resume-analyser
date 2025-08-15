@@ -5,6 +5,7 @@ import { resumes } from "../../constants";
 import { usePuterStore } from "~/lib/puter";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
+import Footer from "~/components/Footer";
 
 export function meta({}: Route.MetaArgs) {
 	return [
@@ -26,9 +27,9 @@ export default function Home() {
 	}, [auth.isAuthenticated]);
 
 	return (
-		<main className="bg-[url('/images/bg-main.svg')] bg-cover">
+		<main className="bg-[url('/images/bg-main.svg')] bg-cover flex flex-col min-h-screen">
 			<Navbar />
-			<section className="main-section">
+			<section className="main-section flex-grow">
 				<div className="page-heading py-16">
 					<h1 className="text-gradient">
 						Monitor Your Job Applications & AI Resume Scores
@@ -46,6 +47,7 @@ export default function Home() {
 					</div>
 				)}
 			</section>
+			<Footer />
 		</main>
 	);
 }

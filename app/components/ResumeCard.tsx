@@ -11,7 +11,7 @@ const ResumeCard = ({
 			to={`/resume/${id}`}
 			className="resume-card animate-in fade-in duration-1000">
 			<div className="resume-card-header">
-				<div className="flex flex-col gap-2">
+				<div className="flex flex-col text-center">
 					<h2 className="!text-black font-bold break-words">
 						{companyName}
 					</h2>
@@ -29,7 +29,7 @@ const ResumeCard = ({
 						<img
 							src={imagePath}
 							alt="resume"
-							className="w-full h-[350px] max-sm:h-[200px] object-cover object-top"
+							className="w-full h-[390px] max-sm:h-[350px] object-cover object-top"
 						/>
 					</div>
 				</div>

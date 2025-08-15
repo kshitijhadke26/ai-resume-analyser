@@ -2,6 +2,7 @@ import { prepareInstructions } from "constants/index";
 import { useState, type FormEvent } from "react";
 import { Form, useNavigate } from "react-router";
 import FileUploader from "~/components/FileUploader";
+import Footer from "~/components/Footer";
 import Navbar from "~/components/Navbar";
 import { convertPdfToImage } from "~/lib/pdf2img";
 import { usePuterStore } from "~/lib/puter";
@@ -75,6 +76,7 @@ const upload = () => {
 		await kv.set(`resume:${uuid}`, JSON.stringify(data));
 		setStatusText("Analysis complete, redirecting...");
 		console.log(data);
+		navigate(`/resume/${uuid}`);
 	};
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -93,9 +95,9 @@ const upload = () => {
 	};
 
 	return (
-		<main className="bg-[url('/images/bg-main.svg')] bg-cover">
+		<main className="bg-[url('/images/bg-main.svg')] bg-cover flex flex-col min-h-screen">
 			<Navbar />
-			<section className="main-section">
+			<section className="main-section flex-grow">
 				<div className="page-heading py-16">
 					<h1>Smart feedback for your dream job</h1>
 					{isProcessing ? (
@@ -162,6 +164,7 @@ const upload = () => {
 					) : null}
 				</div>
 			</section>
+			<Footer />
 		</main>
 	);
 };
