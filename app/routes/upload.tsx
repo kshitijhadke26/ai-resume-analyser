@@ -1,6 +1,6 @@
 import { prepareInstructions } from "constants/index";
 import { useState, type FormEvent } from "react";
-import { Form, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import FileUploader from "~/components/FileUploader";
 import Footer from "~/components/Footer";
 import Navbar from "~/components/Navbar";
