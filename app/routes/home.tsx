@@ -133,18 +133,7 @@ export default function Home() {
 						<div
 							className={`pb-16 transform transition-all duration-1000 delay-300 ${mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}>
 							<div className="max-w-7xl mx-auto">
-								<div className="mb-8 text-center">
-									<h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
-										Your Resume Portfolio
-									</h2>
-									<p className="text-gray-600">
-										{resumes.length} resume
-										{resumes.length > 1 ? "s" : ""} analyzed
-										and ready for review
-									</p>
-								</div>
-
-								<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+								<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
 									{resumes.map((resume, index) => (
 										<div
 											key={resume.id}

@@ -7,16 +7,17 @@ interface FileUploaderProp {
 }
 
 const FileUploader = ({ onFileSelect }: FileUploaderProp) => {
-	const onDrop = useCallback(
-		(acceptedFiles: File[]) => {
-			const file = acceptedFiles[0] || null;
-
-			onFileSelect?.(file);
-		},
-		[onFileSelect]
-	);
-
+	const [selectedFile, setSelectedFile] = useState<File | null>(null);
 	const maxFileSize = 20 * 1024 * 1024;
+
+	const onDrop = useCallback(
+	(acceptedFiles: File[]) => {
+		const file = acceptedFiles[0] || null;
+		setSelectedFile(file);
+		onFileSelect?.(file);
+	},
+	[onFileSelect]
+);
 
 	const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
 		useDropzone({
@@ -28,7 +29,12 @@ const FileUploader = ({ onFileSelect }: FileUploaderProp) => {
 			maxSize: maxFileSize,
 		});
 
-	const file = acceptedFiles[0] || null;
+	const file = selectedFile;
+
+	const handleRemoveFile = () => {
+		setSelectedFile(null);
+		onFileSelect?.(null);
+	};
 
 	return (
 		<div className="w-full gradient-border">
@@ -57,7 +63,8 @@ const FileUploader = ({ onFileSelect }: FileUploaderProp) => {
 							<button
 								className="p-2 cursor-pointer"
 								onClick={(e) => {
-									onFileSelect?.(null);
+									e.stopPropagation(); // Prevent triggering dropzone
+									handleRemoveFile();
 								}}>
 								<img
 									src="/icons/cross.svg"
@@ -67,20 +74,22 @@ const FileUploader = ({ onFileSelect }: FileUploaderProp) => {
 							</button>
 						</div>
 					) : (
-						<div className="">
-							<div className="mx-auto w-16 h-16 flex item-center justify-center mb-2">
+						<div className="flex flex-col items-center text-center">
+							<div className="w-16 h-16 flex items-center justify-center mb-2">
 								<img
 									src="/icons/info.svg"
 									alt="upload"
 									className="size-20"
 								/>
 							</div>
+
 							<p className="text-lg text-gray-500">
 								<span className="font-semibold">
 									Upload your resume
 								</span>{" "}
 								or drag & drop
 							</p>
+
 							<p className="text-lg text-gray-500">
 								Accepted file types: PDF (max{" "}
 								{formatSize(maxFileSize)})
