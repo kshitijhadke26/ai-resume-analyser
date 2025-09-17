@@ -5,4 +5,12 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  optimizeDeps: {
+    include: [
+      "zustand",
+      "react-dropzone",
+      "react-icons",
+      "pdfjs-dist"
+    ]
+  },
 });
